@@ -4,6 +4,14 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from './screens/home';
 import Login from './screens/auth/login/login';
+import Signup1 from './screens/auth/signup/signup1';
+import Signup2 from './screens/auth/signup/signup2';
+import Signup3 from './screens/auth/signup/signup3';
+import Signup4 from './screens/auth/signup/signup4';
+import SignupWorker from './screens/auth/signup/signupWorker';
+import { LogBox } from 'react-native';
+LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
+LogBox.ignoreAllLogs();//Ignore all log notifications
 
 
 const Stack = createNativeStackNavigator();
@@ -18,6 +26,11 @@ export default function App() {
       <Stack.Navigator screenOptions={{headerShown: false, animation:'slide_from_right'}}>
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="Signup1" component={Signup1} />
+        <Stack.Screen name="Signup2" component={Signup2} />
+        <Stack.Screen name="Signup3" component={Signup3} />
+        <Stack.Screen name="Signup4" component={Signup4} />
+        <Stack.Screen name="SignupWorker" component={SignupWorker} />
       </Stack.Navigator>
     </NavigationContainer>
   );

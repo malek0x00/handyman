@@ -32,8 +32,8 @@ export default function Home({ navigation }) {
     
     <Welcomepic height={300} width={300}/>
      <HStack space={4} mt={50} style={{bottom:-20}}>
-        <Button style={{height:50, width:'45%',backgroundColor:'#000', borderRadius:25}} _text={{fontFamily: 'nexa', fontSize:'20px'}}>Login</Button>
-        <Button variant="outline" onPress={() => navigation.navigate('Login')} style={{height:50, width:'45%', borderColor:'#000', borderRadius:25}} _text={{fontFamily: 'nexa', color:'#000000',fontSize:'20px'}}>Signup</Button>
+        <Button onPress={() => navigation.navigate('Login')} style={{height:50, width:'45%',backgroundColor:'#000', borderRadius:25}} _text={{fontFamily: 'nexa', fontSize:'20px'}}>Login</Button>
+        <Button onPress={() => navigation.navigate('Signup1')} variant="outline"  style={{height:50, width:'45%', borderColor:'#000', borderRadius:25}} _text={{fontFamily: 'nexa', color:'#000000',fontSize:'20px'}}>Signup</Button>
       </HStack>
     </VStack>
     </View>

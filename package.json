@@ -1,24 +1,28 @@
 {
   "name": "handyman",
   "version": "1.0.0",
-  "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    "start": "expo start",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
+    "start": "expo start --dev-client",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
     "web": "expo start --web",
     "eject": "expo eject"
   },
   "dependencies": {
+    "@react-native-async-storage/async-storage": "~1.15.0",
     "@react-navigation/native": "^6.0.8",
     "@react-navigation/native-stack": "^6.5.0",
+    "@supabase/supabase-js": "^1.30.3",
     "expo": "~44.0.0",
+    "expo-font": "~10.0.4",
+    "expo-splash-screen": "~0.14.1",
     "expo-status-bar": "~1.2.0",
     "galio-framework": "^0.8.0",
     "native-base": "^3.3.5",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-native": "0.64.3",
+    "react-native-dotenv": "^3.3.1",
     "react-native-gesture-handler": "^2.2.0",
     "react-native-reanimated": "^2.4.0",
     "react-native-safe-area-context": "3.3.2",
@@ -26,8 +30,7 @@
     "react-native-svg": "^12.1.1",
     "react-native-svg-transformer": "^1.0.0",
     "react-native-ui-lib": "^6.9.0",
-    "react-native-web": "0.17.1",
-    "expo-font": "~10.0.4"
+    "react-native-web": "0.17.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"
