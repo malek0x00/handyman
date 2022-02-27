@@ -4,11 +4,11 @@
     "slug": "handyman",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/1000.png",
     "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "image": "./assets/newsplash.png",
+      "resizeMode": "cover",
+      "backgroundColor": "#2196F3"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -20,15 +20,15 @@
       "supportsTablet": true
     },
     "android": {
-      "package": "com.yourcompany.yourappname",
+      "package": "com.malek.handyman",
       "versionCode": 1,
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
+        "foregroundImage": "./assets/1000.png",
+        "backgroundColor": "#2196F3"
       }
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/1000.png"
     }
   }
 }
