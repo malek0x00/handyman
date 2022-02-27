@@ -6,12 +6,13 @@ an app made for the second semester project
 - React Native
 - supabase
 
-### useful websites:
+### useful links:
 - [NativeBase](https://docs.nativebase.io/)
 - [React Navigation](https://reactnavigation.org/docs/getting-started/)
 - [free svg illustrations (undraw)](https://undraw.co/illustrations)
 - [AsyncStorage](https://react-native-async-storage.github.io/async-storage/)
 - [Supabase](https://supabase.com/docs/)
+- [expo build](https://docs.expo.dev/build/setup/) and [expo build apk](https://docs.expo.dev/build-reference/apk/)
 
 
 ### fixes:
