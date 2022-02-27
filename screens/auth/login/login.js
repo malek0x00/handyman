@@ -49,6 +49,7 @@ export default function Login() {
 
 async function check(){
   const temp = await supabase.auth.user();
+  
   alert(JSON.stringify(temp));
 }
 

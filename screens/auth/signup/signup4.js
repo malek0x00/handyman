@@ -1,13 +1,12 @@
 import { StyleSheet, View } from 'react-native';
-import { NativeBaseProvider, Button, VStack, Text, Input, extendTheme, Heading, HStack, Select } from "native-base";
+import { NativeBaseProvider, Button, VStack, Text, Input, extendTheme, HStack} from "native-base";
 import { MaterialIcons } from '@expo/vector-icons';
-import { isLoaded, isLoading, useFonts } from 'expo-font';
+import { isLoaded, useFonts } from 'expo-font';
 import { useEffect, useState } from 'react';
 import {supabase} from '../../../lib/supabase'
-import Media from '../../../media/5.svg';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-
+//add phone number screen after worker page only
 export default function Signup4({ navigation }) {
 
 
@@ -39,36 +38,41 @@ export default function Signup4({ navigation }) {
   const handleShow = () => setShow(!show);
 
   async function goNext(){
-   //await storeData(type);
-    navigation.navigate("Signup2");
+    await signUpWithEmail(email, pass);
+   // navigation.navigate("Signup2");
   }
 
-  const storeData = async (value) => {
-    try {
-      await AsyncStorage.setItem('city', value)
-    } catch (e) {
-      // saving error
-    }
-  }
-
-  const getData = async () => {
-    try {
+  async function signUpWithEmail() {
+    const { user, error } = await supabase.auth.signUp({
+      email: email,
+      password: pass,
+    });
       const name = await AsyncStorage.getItem('name');
       const type = await AsyncStorage.getItem('type');
       const job = await AsyncStorage.getItem('job');
       const city = await AsyncStorage.getItem('city');
-      if(name !== null) {
-        //alert("name: "+name+"\ntype: "+type+"\njob: "+job+"\ncity: "+city)
-      }
-    } catch(e) {
-      // error reading value
+      const phone = await AsyncStorage.getItem('phone');
+    //await check();
+    if (!error){
+      if (type=='worker'){
+        
+      const { data, error } = await supabase.from('users')
+        .insert([
+            { uid: user.id, email: email, name: name, typeofuser: type, job: job, phone: phone, city: city}
+          ]).then(navigation.navigate("SignupFinal"));
+        }
+        else{
+          const { data, error } = await supabase.from('users')
+        .insert([
+            { uid: user.id, email: email, name: name, typeofuser: type, city: city}
+          ]).then(navigation.navigate("SignupFinal"));
+        }  
     }
-  }
-  
-  useEffect(() => {
-    getData();
-  })
-  
+    else {
+      alert(error.message)
+    }
+    //alert("error:"+JSON.stringify(error)+"\nuser:"+JSON.stringify(user));
+}
 
   if (!isLoaded('nexa')) {
     return <Text>LOADING</Text>;
@@ -82,7 +86,7 @@ export default function Signup4({ navigation }) {
 
           <VStack space={10} alignItems="center" style={{ width: '100%' }}>
             <Text fontSize={18} style={{ fontFamily: 'nexa', color: '#fff', position: 'absolute', top: -60, alignSelf: 'flex-start', left: '5%' }}>alright, one last step, please provide an email and a password to create your account</Text>
-            <Input onChangeText={e => setEmail(e)} leftElement={<MaterialIcons name="alternate-email" size={24} color="black" style={{ paddingLeft: 15 }} />} borderRadius={30} bgColor={'#fff'} w={"90%"} h={55} borderColor={'#000'} borderWidth={2} variant="filled" size="lg" placeholder="Your email..." />
+            <Input type='email' onChangeText={e => setEmail(e)} leftElement={<MaterialIcons name="alternate-email" size={24} color="black" style={{ paddingLeft: 15 }} />} borderRadius={30} bgColor={'#fff'} w={"90%"} h={55} borderColor={'#000'} borderWidth={2} variant="filled" size="lg" placeholder="Your email..." />
             <Input onChangeText={e => setPass(e)} type={show ? "text" : "password"} leftElement={<MaterialIcons name="lock" size={24} color="black" style={{ paddingLeft: 15 }} />} borderRadius={30} bgColor={'#fff'} w={"90%"} h={55} borderColor={'#000'} borderWidth={2} variant="filled" size="lg" placeholder="Your password..." InputRightElement={<MaterialIcons name={show ? 'visibility-off' : 'visibility'} size={24} style={{ paddingRight: 15 }} onPress={handleShow} color="#000" />} />
             <Input onChangeText={e => setCPass(e)} type={show ? "text" : "password"} leftElement={<MaterialIcons name="lock" size={24} color="black" style={{ paddingLeft: 15 }} />} borderRadius={30} bgColor={'#fff'} w={"90%"} h={55} borderColor={'#000'} borderWidth={2} variant="filled" size="lg" placeholder="Repeat your password..." InputRightElement={<MaterialIcons name={show ? 'visibility-off' : 'visibility'} size={24} style={{ paddingRight: 15 }} onPress={handleShow} color="#000" />} />
             

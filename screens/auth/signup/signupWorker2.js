@@ -1,14 +1,14 @@
 import { StyleSheet, View } from 'react-native';
-import { NativeBaseProvider, Button, VStack, Text, Input, extendTheme, Heading, HStack, Select } from "native-base";
+import { NativeBaseProvider, Button, VStack, Text, Input, extendTheme, Heading, HStack, Select, InputGroup,InputLeftAddon } from "native-base";
 import { MaterialIcons } from '@expo/vector-icons';
 import { isLoaded, isLoading, useFonts } from 'expo-font';
 import { useEffect, useState } from 'react';
 import {supabase} from '../../../lib/supabase'
-import Media from '../../../media/4.svg';
+import Media from '../../../media/6.svg';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
-export default function SignupWorker({ navigation }) {
+export default function SignupWorker2({ navigation }) {
 
 
 
@@ -32,21 +32,21 @@ export default function SignupWorker({ navigation }) {
     },
   });
 
-  const [job, setJob] = useState();
+  const [phone, setPhone] = useState();
   
   async function goNext(){
-   await storeData(job);
-    navigation.navigate("SignupWorker2");
+   await storeData(phone);
+    navigation.navigate("Signup3");
   }
 
   async function goBack(){
     await storeData("");
-  navigation.navigate('Signup2')
+  navigation.navigate('SignupWorker')
    }
 
   const storeData = async (value) => {
     try {
-      await AsyncStorage.setItem('job', value)
+      await AsyncStorage.setItem('phone', value)
     } catch (e) {
       // saving error
     }
@@ -66,16 +66,14 @@ export default function SignupWorker({ navigation }) {
         <View style={styles.container}>
 
           <VStack space={10} alignItems="center" style={{ width: '90%' }}>
-            <Text fontSize={30} style={{ fontFamily: 'nexa', color: '#fff', position: 'absolute', top: -60, alignSelf: 'flex-start', left: '5%' }}>so, what do you do?</Text>
+            <Text fontSize={30} style={{ fontFamily: 'nexa', color: '#fff', position: 'absolute', top: -60, alignSelf: 'flex-start', left: '5%' }}>what's your phone number?</Text>
             <Media height={300} width={300}/>
             <HStack space={5} alignItems="center" justifyContent="center" w={'100%'}>
-              <Text fontSize={30} color={'#fff'} top={-2}>I'm a</Text>
-              <Select defaultValue={job} w={150} fontSize={15} color={'#fff'} onValueChange={e => {setJob(e)}}>
-                <Select.Item  label="Electrician" value="electrician"/>
-                <Select.Item  label="Carpenter" value="carpenter"/>
-                <Select.Item  label="Painter" value="painter"/>
-                <Select.Item  label="Plumber" value="plumber"/>
-              </Select>
+            <InputGroup>
+            <InputLeftAddon children={"+216"}  />
+             <Input keyboardType="number-pad" w={'80%'} bgColor={'#fff'} color="#000" variant={'filled'} type={'number'} fontSize={15} onChangeText={e => {setPhone(e)}}/>
+             </InputGroup>
+              
             </HStack>
             
             </VStack>
