@@ -71,8 +71,8 @@ export default function SignupWorker({ navigation }) {
             <HStack space={5} alignItems="center" justifyContent="center" w={'100%'}>
               <Text fontSize={30} color={'#fff'} top={-2}>I'm a</Text>
               <Select defaultValue={job} w={150} fontSize={15} color={'#fff'} onValueChange={e => {setJob(e)}}>
-                <Select.Item  label="Electrician" value="electrician"/>
                 <Select.Item  label="Carpenter" value="carpenter"/>
+                <Select.Item  label="Gardener" value="gardener"/>
                 <Select.Item  label="Painter" value="painter"/>
                 <Select.Item  label="Plumber" value="plumber"/>
               </Select>

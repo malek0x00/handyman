@@ -7,7 +7,7 @@ import {supabase} from '../../../lib/supabase'
 
 
 
-export default function Login() {
+export default function Login({ navigation }) {
 
 
 
@@ -49,7 +49,9 @@ export default function Login() {
 
 async function check(){
   const temp = await supabase.auth.user();
-  
+  if (temp){
+    navigation.navigate('MainScreen')
+  }
   alert(JSON.stringify(temp));
 }
 

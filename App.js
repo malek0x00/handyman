@@ -12,6 +12,7 @@ import SignupWorker from './screens/auth/signup/signupWorker';
 import SignupWorker2 from './screens/auth/signup/signupWorker2';
 import { LogBox } from 'react-native';
 import SignupFinal from './screens/auth/signup/signupFinal';
+import MainScreen from './screens/mainscreen';
 LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
 LogBox.ignoreAllLogs();//Ignore all log notifications
 
@@ -35,6 +36,7 @@ export default function App() {
         <Stack.Screen name="SignupWorker" component={SignupWorker} />
         <Stack.Screen name="SignupWorker2" component={SignupWorker2} />
         <Stack.Screen name="SignupFinal" component={SignupFinal} />
+        <Stack.Screen name="MainScreen" component={MainScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
