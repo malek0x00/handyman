@@ -40,17 +40,12 @@ export default function TestScreen({ navigation }) {
     <View style={styles.container}>
     <Text>eds</Text>
     <Button onPress={() => {alert('eds')}}>go</Button>
-    <MotiView
-      from={{ opacity: 0, scale:0.5 }}
-      animate={{ opacity: 1, scale:2 }}
-      transition={{ type: 'timing', duration:'1000' }}
-      style={{height:200,width:200,backgroundColor:'#ff00ff99', zIndex:0}}
-    />
+    
     </View>
 
     </NativeBaseProvider>
-  );
-      }
+    );
+  }
 }
 
 const styles = StyleSheet.create({
