@@ -56,7 +56,7 @@ export default function MainScreen({ navigation }) {
       </Avatar>
       </View>
       <ScrollView w={'100%'} height={'1%'} marginTop={'30%'} >
-        <View style={{width:'100%', height:320,left:-50,backgroundColor:'#f9b126', borderRadius:50}}  onStartShouldSetResponder={() => alert(1)}>
+        <View style={{width:'100%', height:320,left:-50,backgroundColor:'#f9b126', borderRadius:50}}  onStartShouldSetResponder={() => navigation.navigate('TestScreen')}>
         <Gardener height={250} style={{ marginLeft:20, marginTop:10}} />
         <Text style={{display:'flex', alignSelf:'center', top:0, left:20}} color={'#151e34'} fontSize={32}>Gardener</Text>
         </View>

@@ -13,6 +13,7 @@ import SignupWorker2 from './screens/auth/signup/signupWorker2';
 import { LogBox } from 'react-native';
 import SignupFinal from './screens/auth/signup/signupFinal';
 import MainScreen from './screens/mainscreen';
+import TestScreen from './screens/testScreen';
 LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
 LogBox.ignoreAllLogs();//Ignore all log notifications
 
@@ -28,7 +29,7 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator screenOptions={{headerShown: false, animation:'slide_from_right'}}>
         <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="Login" component={Login} options={{animation:'slide_from_left'}}/>
         <Stack.Screen name="Signup1" component={Signup1} />
         <Stack.Screen name="Signup2" component={Signup2} />
         <Stack.Screen name="Signup3" component={Signup3} />
@@ -37,6 +38,7 @@ export default function App() {
         <Stack.Screen name="SignupWorker2" component={SignupWorker2} />
         <Stack.Screen name="SignupFinal" component={SignupFinal} />
         <Stack.Screen name="MainScreen" component={MainScreen} />
+        <Stack.Screen name="TestScreen" component={TestScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
