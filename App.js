@@ -14,6 +14,10 @@ import { LogBox } from 'react-native';
 import SignupFinal from './screens/auth/signup/signupFinal';
 import MainScreen from './screens/mainscreen';
 import TestScreen from './screens/testScreen';
+import Gardener from './screens/crafts/gardenerScreen';
+import Painter from './screens/crafts/painterScreen';
+import Carpenter from './screens/crafts/carpenterScreen';
+import Plumber from './screens/crafts/plumberScreen';
 LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
 LogBox.ignoreAllLogs();//Ignore all log notifications
 
@@ -38,8 +42,13 @@ export default function App() {
         <Stack.Screen name="SignupWorker2" component={SignupWorker2} />
         <Stack.Screen name="SignupFinal" component={SignupFinal} />
         <Stack.Screen name="MainScreen" component={MainScreen} />
-        <Stack.Screen name="TestScreen" component={TestScreen} />
+        <Stack.Screen name="TestScreen" component={TestScreen} options={{animation:'fade'}} />
+        <Stack.Screen name="GardenerScreen" component={Gardener} options={{animation:'fade'}} />
+        <Stack.Screen name="PainterScreen" component={Painter} options={{animation:'fade'}} />
+        <Stack.Screen name="CarpenterScreen" component={Carpenter} options={{animation:'fade'}} />
+        <Stack.Screen name="PlumberScreen" component={Plumber} options={{animation:'fade'}} />
       </Stack.Navigator>
+      
     </NavigationContainer>
   );
 }
