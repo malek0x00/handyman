@@ -26,6 +26,10 @@ export default function Plumber({ navigation }) {
     
         },
       });
+
+      useEffect(()=>{
+        alert("get them data")
+      })
       
 
       if (!isLoaded('nexa')) {
