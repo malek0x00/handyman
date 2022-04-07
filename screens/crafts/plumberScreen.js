@@ -1,10 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import { NativeBaseProvider,Button,VStack ,HStack, extendTheme,Heading} from "native-base";
+import { StyleSheet, View } from 'react-native';
+import { NativeBaseProvider,Button,VStack ,HStack, ScrollView,extendTheme,Text} from "native-base";
 import { AntDesign } from '@expo/vector-icons';
-
+import { supabase } from '../../lib/supabase';
 import { isLoaded, isLoading, useFonts } from 'expo-font';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import MenuItem from '../../components/menuItem';
 
 export default function Plumber({ navigation }) {
   const [loaded] = useFonts({
@@ -16,6 +17,7 @@ export default function Plumber({ navigation }) {
     'nexaBook': require('../../assets/fonts/NexaBook.otf'),
     'nexaBlack': require('../../assets/fonts/NexaBlack.otf'),
   });
+  const [rows, setRows] = useState();
 
       const theme = extendTheme({
 
@@ -27,9 +29,25 @@ export default function Plumber({ navigation }) {
         },
       });
 
-      useEffect(()=>{
-        alert("get them data")
-      })
+      async function loadData(){
+        const { data, error } = await supabase
+          .from('users')
+          .select()
+          .match({job: 'plumber'});
+          //alert("data:"+JSON.stringify(data));
+          setRows(data);
+        }
+  
+        useEffect(()=>{
+          loadData();
+        })
+        let wsk=[]
+
+        if (rows){
+          rows.map(worker => {
+            wsk.push(<MenuItem name={worker.name} city={worker.city} phone={worker.phone} avcolor="#0471A6"/>)
+          })
+        }
       
 
       if (!isLoaded('nexa')) {
@@ -40,8 +58,13 @@ export default function Plumber({ navigation }) {
   return (
     <NativeBaseProvider theme={theme}>
     <View style={styles.container}>
-    <Text>eds</Text>
-    <Button onPress={() => {alert('eds')}}>go</Button>
+    <Text fontSize={50} style={{fontFamily: 'nexaHeavy', color: '#0471A6',position:'absolute', top:70,left:20}}>Plumbers</Text>
+    <ScrollView w={'100%'} marginTop={'40%'} height={'100%'}>
+    <View style={{display:'flex',height:'100%',width:'100%',top:'0%',paddingHorizontal:20}}>
+    {wsk}
+    
+    </View>
+    </ScrollView>
     </View>
 
     </NativeBaseProvider>

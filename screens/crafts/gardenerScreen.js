@@ -1,11 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import { NativeBaseProvider,Button,VStack ,HStack, extendTheme,Heading} from "native-base";
+import { StyleSheet, View } from 'react-native';
+import { NativeBaseProvider,Text,Button,VStack ,HStack, ScrollView,extendTheme,Heading} from "native-base";
 import { AntDesign } from '@expo/vector-icons';
-
+import { supabase } from '../../lib/supabase';
 import { isLoaded, isLoading, useFonts } from 'expo-font';
-import { useEffect } from 'react';
-
+import { useEffect, useState } from 'react';
+import MenuItem from '../../components/menuItem';
 export default function Gardener({ navigation }) {
     const [loaded] = useFonts({
         'nexa': require('../../assets/fonts/NexaBold.otf'),
@@ -17,6 +17,8 @@ export default function Gardener({ navigation }) {
         'nexaBlack': require('../../assets/fonts/NexaBlack.otf'),
       });
 
+      const [rows, setRows] = useState();
+
       const theme = extendTheme({
 
         fonts: {
@@ -27,6 +29,26 @@ export default function Gardener({ navigation }) {
         },
       });
       
+      async function loadData(){
+        const { data, error } = await supabase
+          .from('users')
+          .select()
+          .match({job: 'gardener'});
+          //alert("data:"+JSON.stringify(data));
+          setRows(data);
+        }
+  
+        useEffect(()=>{
+          loadData();
+        })
+        let wsk=[]
+
+        if (rows){
+          rows.map(worker => {
+            wsk.push(<MenuItem name={worker.name} city={worker.city} phone={worker.phone} avcolor="#64470f"/>)
+          })
+        }
+
 
       if (!isLoaded('nexa')) {
         return <Text>LOADING</Text>;
@@ -36,8 +58,13 @@ export default function Gardener({ navigation }) {
   return (
     <NativeBaseProvider theme={theme}>
     <View style={styles.container}>
-    <Text>eds</Text>
-    <Button onPress={() => {alert('eds')}}>go</Button>
+    <Text fontSize={50} style={{fontFamily: 'nexaHeavy', color: '#64470f',position:'absolute', top:70,left:20}}>Gardeners</Text>
+    <ScrollView w={'100%'} marginTop={'40%'} height={'100%'}>
+    <View style={{display:'flex',height:'100%',width:'100%',top:'0%',paddingHorizontal:20}}>
+    {wsk}
+    
+    </View>
+    </ScrollView>
     </View>
 
     </NativeBaseProvider>
@@ -48,7 +75,6 @@ export default function Gardener({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#f9b126'
