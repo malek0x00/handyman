@@ -4,6 +4,7 @@ import { NativeBaseProvider,Button,VStack ,HStack, extendTheme,Text, Avatar} fro
 import { AntDesign } from '@expo/vector-icons';
 import {useFonts } from 'expo-font';
 import { MaterialIcons } from '@expo/vector-icons';
+import call from 'react-native-phone-call';
 
 function MenuItem(props) {
     const [loaded] = useFonts({
@@ -28,7 +29,7 @@ function MenuItem(props) {
 
     return ( 
     <NativeBaseProvider theme={theme}>
-    <View style={{width:'100%', marginTop:10,marginBottom:20,height:150, display:'flex',justifyContent:'center',paddingLeft:15,backgroundColor:'#fff', borderRadius:15, shadowColor:'#000', elevation:10}} onStartShouldSetResponder={()=>{alert("1")}}>
+    <View style={{width:'100%', marginTop:10,marginBottom:20,height:150, display:'flex',justifyContent:'center',paddingLeft:15,backgroundColor:'#fff', borderRadius:15, shadowColor:'#000', elevation:10}} onStartShouldSetResponder={()=>{call({number:props.phone, prompt:true})}}>
       <View style={{display:'flex',flexDirection:'row'}}>
         <Avatar bg={props.avcolor} w={75} h={75}>{props.name[0]}</Avatar>
           <View  style={{marginLeft:20}}>
