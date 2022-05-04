@@ -30,7 +30,7 @@ for more information on [expo](https://docs.expo.dev/get-started/installation/).
 <p float="left">
   <img src="./screen_caps/signup1.jpg" width="30%" />
   <img src="./screen_caps/signup2.jpg" width="30%" />
-  <img src="./screen_caps/signup1.jpg" width="30%" />
+  <img src="./screen_caps/signup3.jpg" width="30%" />
 </p>
 <p float="left">
   <img src="./screen_caps/signup4.jpg" width="30%" />
