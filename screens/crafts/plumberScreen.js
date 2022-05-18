@@ -46,7 +46,7 @@ export default function Plumber({ navigation }) {
 
         if (rows){
           rows.map(worker => {
-            wsk.push(<MenuItem name={worker.name} uid={worker.uid} city={worker.city} phone={worker.phone} avcolor="#0471A6"/>)
+            wsk.push(<MenuItem name={worker.name} uid={worker.uid} city={worker.city} phone={worker.phone} description={worker.description} avcolor="#0471A6"/>)
           })
         }
       

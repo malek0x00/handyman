@@ -18,15 +18,11 @@ import Gardener from './screens/crafts/gardenerScreen';
 import Painter from './screens/crafts/painterScreen';
 import Carpenter from './screens/crafts/carpenterScreen';
 import Plumber from './screens/crafts/plumberScreen';
-LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
-LogBox.ignoreAllLogs();//Ignore all log notifications
+LogBox.ignoreLogs(['Warning: ...']);
+LogBox.ignoreAllLogs();
 
 
 const Stack = createNativeStackNavigator();
-
-//add this line to go to any screen
-//onPress={() => navigation.navigate('Login')}
-//#E96590 secondary color of illustrations
 
 export default function App() {
   return (

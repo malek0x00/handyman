@@ -47,7 +47,7 @@ export default function Carpenter({ navigation }) {
 
         if (rows){
           rows.map(worker => {
-            wsk.push(<MenuItem name={worker.name} uid={worker.uid} city={worker.city} phone={worker.phone} avcolor="#62342b"/>)
+            wsk.push(<MenuItem name={worker.name} uid={worker.uid} city={worker.city} phone={worker.phone} description={worker.description} avcolor="#62342b"/>)
           })
         }
 

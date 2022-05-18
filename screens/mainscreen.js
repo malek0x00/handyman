@@ -1,5 +1,5 @@
-import { StyleSheet, View } from 'react-native';
-import { NativeBaseProvider, Avatar,Button, Select,Text, Input, ScrollView,extendTheme, Modal, Spinner } from "native-base";
+import { StyleSheet, View, ToastAndroid } from 'react-native';
+import { NativeBaseProvider, TextArea,Avatar,Button, Select,Text, Input, ScrollView,extendTheme, Modal, Spinner } from "native-base";
 import { MaterialIcons } from '@expo/vector-icons';
 import { isLoaded, isLoading, useFonts } from 'expo-font';
 import { useEffect, useState } from 'react';
@@ -44,6 +44,7 @@ export default function MainScreen({ navigation }) {
   const [ephone, setEphone] = useState('');
   const [ejob, setEjob] = useState('');
   const [ecity, setEcity] = useState('');
+  const [edesc, setEdesc] = useState('');
   const toast = useToast();
 
 
@@ -68,16 +69,18 @@ export default function MainScreen({ navigation }) {
       setEphone(data[0].phone)
       setEcity(data[0].city)
       setEjob(data[0].job)
+      setEdesc(data[0].description)
     }
 
     async function handleEdit(){
-      let newdata = {name:ename, email:email, phone:ephone, city:ecity, job:ejob}
-      alert(JSON.stringify(newdata));
+      let newdata = {name:ename, email:email, phone:ephone, city:ecity, job:ejob, description:edesc}
+      //alert(JSON.stringify(newdata));
       const { data, error } = await supabase
       .from('users')
       .update(newdata)
       .match({ uid: usr.id })
-      toast.show({description:'yes'})
+      ToastAndroid.show('Data saved successfully!', ToastAndroid.SHORT);
+      setShowModal(false)
     }
 
     
@@ -149,15 +152,24 @@ export default function MainScreen({ navigation }) {
             </View>
             
             
-            {info[0].job? 
+            {info[0].job?
+            <View> 
             <View style={{display:'flex', flexDirection:'row', alignItems:'center', marginBottom:10}}>
             <Text style={{width:'20%'}}>job:</Text>
-            <Select fontSize={15} w={"66.5%"} borderRadius={10} size="lg" color={'#000'} backgroundColor={'gray.200'}>
+            <Select defaultValue={ejob} fontSize={15} w={"66.5%"} borderRadius={10} size="lg" color={'#000'} backgroundColor={'gray.200'}>
                 <Select.Item  label="Carpenter" value="carpenter"/>
                 <Select.Item  label="Gardener" value="gardener"/>
                 <Select.Item  label="Painter" value="painter"/>
                 <Select.Item  label="Plumber" value="plumber"/>
-              </Select></View>:<></>}
+              </Select>
+              </View>
+              <View style={{display:'flex', flexDirection:'row', alignItems:'center', marginBottom:10}}>
+            <Text style={{width:'20%'}}>bio:</Text>
+            <TextArea onChangeText={(e)=>{setEdesc(e)}} value={edesc} placeholder='description about yourself' fontSize={15} w={"80%"} borderRadius={10} size="lg" color={'#000'} backgroundColor={'gray.200'} />
+            
+              </View>
+              </View>
+              :<></>}
             
             
             <View style={{display:'flex', flexDirection:'row', alignItems:'center', marginBottom:10}}>

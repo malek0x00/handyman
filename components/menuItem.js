@@ -3,7 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import { NativeBaseProvider,Button,VStack ,HStack, extendTheme,Text, Avatar, Pressable, Modal} from "native-base";
 import { AntDesign } from '@expo/vector-icons';
 import {useFonts } from 'expo-font';
-import { MaterialIcons } from '@expo/vector-icons';
+import { MaterialIcons,Ionicons } from '@expo/vector-icons';
 import call from 'react-native-phone-call';
 import { useEffect, useState } from 'react';
 import { Rating, AirbnbRating } from 'react-native-ratings';
@@ -36,10 +36,27 @@ function MenuItem(props) {
 
     async function rate(){
       const user = supabase.auth.user()
-      let myid = user.id;
+      let newrate = null;
+        let newcount = null;
+      await getdata().then(()=>{
+        
+        if (datar[0]!==undefined){
+          //newrate = ((datar[0].rating*datar[0].nr)+ratev)/datar[0].nr+1
+          newrate = (datar[0].rating+ratev)/2
+          newcount = datar[0].nr+1
+        }
+        else{
+          newrate = ratev
+          newcount = 1
+        }
+      })
+      
       const { data, error } = await supabase
-      .from('ratings')
-      .upsert([{ id: props.uid,rating:ratev,nr:0 }])
+        .from('ratings')
+        .upsert([{ id: props.uid,rating:newrate,nr:newcount }])
+        
+     
+      
       
       //alert(JSON.stringify({ uid: props.uid,rating:e,nr:0 }))
         
@@ -100,9 +117,12 @@ function MenuItem(props) {
             </View>
             <View style={{marginLeft:30, marginTop:20}}>
             <Text color={"#808080"}>Description:</Text>
-            <Text>{props.description}</Text>
+            <Text>{props.description?props.description:"no description available"}</Text>
             <View >
-            <Rating type='star' onFinishRating={(e)=>{setRatev(e)}} style={{marginTop:10, marginBottom:20}} readonly={false} ratingCount={5} imageSize={30}/>
+            <Rating type='star' startingValue={0} onFinishRating={(e)=>{setRatev(e)}} style={{marginTop:20, marginBottom:20}} readonly={false} ratingCount={5} imageSize={30}/>
+            </View>
+            <View>
+              <Button onPress={()=>{call({number:props.phone, prompt:true})}} variant="ghost" _text={{color:'#7CB342'}} leftIcon={<Ionicons name="ios-call-outline" size={24} color="#7CB342"/>}>Call</Button>
             </View>
             </View>
           </Modal.Body>
