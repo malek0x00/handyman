@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View } from 'react-native';
-import { NativeBaseProvider,Button,VStack ,HStack, ScrollView,extendTheme,Text} from "native-base";
+import { NativeBaseProvider,Button,VStack ,HStack, ScrollView,extendTheme,Text, Modal, Input} from "native-base";
 import { AntDesign } from '@expo/vector-icons';
 import { supabase } from '../../lib/supabase';
 import { isLoaded, isLoading, useFonts } from 'expo-font';
@@ -18,7 +18,6 @@ export default function Plumber({ navigation }) {
     'nexaBlack': require('../../assets/fonts/NexaBlack.otf'),
   });
   const [rows, setRows] = useState();
-
       const theme = extendTheme({
 
         fonts: {
@@ -28,6 +27,8 @@ export default function Plumber({ navigation }) {
     
         },
       });
+      
+      
 
       async function loadData(){
         const { data, error } = await supabase
@@ -45,7 +46,7 @@ export default function Plumber({ navigation }) {
 
         if (rows){
           rows.map(worker => {
-            wsk.push(<MenuItem name={worker.name} city={worker.city} phone={worker.phone} avcolor="#0471A6"/>)
+            wsk.push(<MenuItem name={worker.name} uid={worker.uid} city={worker.city} phone={worker.phone} avcolor="#0471A6"/>)
           })
         }
       
@@ -63,7 +64,9 @@ export default function Plumber({ navigation }) {
     <View style={{display:'flex',height:'100%',width:'100%',top:'0%',paddingHorizontal:20}}>
     {wsk}
     
+    
     </View>
+    
     </ScrollView>
     </View>
 

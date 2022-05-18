@@ -45,7 +45,7 @@ export default function Gardener({ navigation }) {
 
         if (rows){
           rows.map(worker => {
-            wsk.push(<MenuItem name={worker.name} city={worker.city} phone={worker.phone} avcolor="#64470f"/>)
+            wsk.push(<MenuItem name={worker.name} uid={worker.uid} description={worker.description} city={worker.city} phone={worker.phone} avcolor="#64470f"/>)
           })
         }
 

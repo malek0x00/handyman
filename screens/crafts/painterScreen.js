@@ -45,7 +45,7 @@ export default function Painter({ navigation }) {
 
         if (rows){
           rows.map(worker => {
-            wsk.push(<MenuItem name={worker.name} city={worker.city} phone={worker.phone} avcolor="#407076"/>)
+            wsk.push(<MenuItem name={worker.name} uid={worker.uid} city={worker.city} phone={worker.phone} avcolor="#407076"/>)
           })
         }
 
