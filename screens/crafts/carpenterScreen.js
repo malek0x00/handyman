@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View } from 'react-native';
-import { NativeBaseProvider,Button,VStack ,Text, ScrollView,HStack, extendTheme,Heading} from "native-base";
+import { NativeBaseProvider,Button,Spinner ,Text, ScrollView,HStack, extendTheme,Heading} from "native-base";
 import { AntDesign } from '@expo/vector-icons';
 import { supabase } from '../../lib/supabase';
 import { isLoaded, isLoading, useFonts } from 'expo-font';
@@ -54,7 +54,13 @@ export default function Carpenter({ navigation }) {
 
 
       if (!isLoaded('nexa')) {
-        return <Text>LOADING</Text>;
+        return(
+          <NativeBaseProvider theme={theme}>
+          <View style={styles.container}>
+          <Spinner color={"#fff"} />
+          </View>
+          </NativeBaseProvider>
+          );
       }
       else{ 
   

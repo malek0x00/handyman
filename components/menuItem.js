@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View } from 'react-native';
-import { NativeBaseProvider,Button,VStack ,HStack, extendTheme,Text, Avatar, Pressable, Modal} from "native-base";
+import { NativeBaseProvider,Button,VStack ,Spinner, extendTheme,Text, Avatar, Pressable, Modal} from "native-base";
 import { AntDesign } from '@expo/vector-icons';
 import {useFonts } from 'expo-font';
 import { MaterialIcons,Ionicons } from '@expo/vector-icons';
@@ -150,8 +150,12 @@ function MenuItem(props) {
 }
 else {
   return(
-    <Text>loading ding</Text>
-  );
+    <NativeBaseProvider theme={theme}>
+    <View style={{marginVertical:50}}>
+    <Spinner color={"#fff"} />
+    </View>
+    </NativeBaseProvider>
+    );
 }
 
 }
